@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#b83b35">
+  <meta name="description" content="Learn Japanese offline with Hindi and English explanations, lessons, flashcards and quizzes.">
+  <title>Nihongo AI — Japanese Learning</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Nihongo AI home" data-nav="home">
+        <span class="brand-mark">日</span>
+        <span><strong>Nihongo AI</strong><small>Your Japanese learning companion</small></span>
+      </a>
+      <div class="header-actions">
+        <span id="network-status" class="status-pill"><i></i> Checking…</span>
+        <button id="language-toggle" class="icon-button" aria-label="Switch explanation language" title="Switch language">HI / EN</button>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section id="home-view" class="view active">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow" data-i18n="dailyPath">YOUR DAILY PATH</span>
+            <h1 data-i18n="heroTitle">A little Japanese, every day.</h1>
+            <p data-i18n="heroText">Learn at your pace. Your lessons and progress stay on this device.</p>
+            <button class="primary-button" data-nav="lessons"><span data-i18n="continueLearning">Continue learning</span> <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="hero-art" aria-hidden="true"><span class="sun"></span><span class="mountain mountain-back"></span><span class="mountain mountain-front"></span><span class="hero-kanji">学</span></div>
+        </div>
+
+        <div class="section-heading"><div><span class="eyebrow" data-i18n="yourJourney">YOUR JOURNEY</span><h2 data-i18n="todayAtAGlance">Today at a glance</h2></div></div>
+        <div class="stats-grid">
+          <article class="stat-card"><span class="stat-icon">📘</span><div><strong id="completed-count">0</strong><span data-i18n="lessonsDone">Lessons done</span></div></article>
+          <article class="stat-card"><span class="stat-icon">あ</span><div><strong id="words-count">0</strong><span data-i18n="wordsPracticed">Words practised</span></div></article>
+          <article class="stat-card"><span class="stat-icon">✦</span><div><strong id="best-score">—</strong><span data-i18n="latestQuiz">Latest quiz</span></div></article>
+        </div>
+
+        <div class="section-heading"><div><span class="eyebrow" data-i18n="startSmall">START SMALL</span><h2 data-i18n="pickUpWhere">Pick up where you are</h2></div><button class="text-button" data-nav="lessons" data-i18n="seeAll">See all →</button></div>
+        <div id="home-lessons" class="lesson-grid"></div>
+
+        <div class="tip-card"><div class="tip-symbol">今日</div><div><strong data-i18n="dailyTip">Today's tiny tip</strong><p id="daily-tip">Say each new word aloud. Small, steady practice builds recall.</p></div></div>
+      </section>
+
+      <section id="lessons-view" class="view">
+        <div class="page-heading"><span class="eyebrow" data-i18n="learningLibrary">LEARNING LIBRARY</span><h1 data-i18n="lessonsTitle">Your Japanese lessons</h1><p data-i18n="lessonsSubtitle">Short lessons you can revisit whenever you need.</p></div>
+        <div class="filter-row" id="lesson-filters">
+          <button class="filter-chip selected" data-filter="all" data-i18n="all">All</button>
+          <button class="filter-chip" data-filter="writing" data-i18n="writing">Writing</button>
+          <button class="filter-chip" data-filter="words" data-i18n="vocabulary">Vocabulary</button>
+          <button class="filter-chip" data-filter="grammar" data-i18n="grammar">Grammar</button>
+        </div>
+        <div id="all-lessons" class="lesson-grid"></div>
+      </section>
+
+      <section id="lesson-view" class="view">
+        <button class="back-button" data-nav="lessons">← <span data-i18n="backToLessons">Back to lessons</span></button>
+        <article id="lesson-detail" class="lesson-detail"></article>
+      </section>
+
+      <section id="practice-view" class="view">
+        <div class="page-heading"><span class="eyebrow" data-i18n="rememberMore">REMEMBER MORE</span><h1 data-i18n="practiceTitle">Flashcard practice</h1><p data-i18n="practiceSubtitle">Recall first, then reveal the answer.</p></div>
+        <div id="flashcard-area"></div>
+      </section>
+
+      <section id="quiz-view" class="view">
+        <div class="page-heading"><span class="eyebrow" data-i18n="quickCheck">QUICK CHECK</span><h1 data-i18n="quizTitle">A little quiz</h1><p data-i18n="quizSubtitle">A few questions help your memory grow.</p></div>
+        <div id="quiz-area"></div>
+      </section>
+
+      <section id="progress-view" class="view">
+        <div class="page-heading"><span class="eyebrow" data-i18n="yourGrowth">YOUR GROWTH</span><h1 data-i18n="progressTitle">Your progress</h1><p data-i18n="progressSubtitle">Your learning data is saved locally on this device.</p></div>
+        <div id="progress-detail"></div>
+        <div class="settings-card">
+          <h2 data-i18n="settings">Settings</h2>
+          <label class="setting-row"><span><strong data-i18n="explanationLanguage">Explanation language</strong><small data-i18n="chooseLanguage">Choose Hindi or English</small></span><select id="settings-language"><option value="en">English</option><option value="hi">हिन्दी</option></select></label>
+          <label class="setting-row"><span><strong data-i18n="dailyGoal">Daily goal</strong><small data-i18n="dailyGoalDesc">A gentle target to keep you moving</small></span><select id="daily-goal"><option value="5">5 minutes</option><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="20">20 minutes</option></select></label>
+          <div class="settings-actions"><button id="export-data" class="secondary-button" data-i18n="exportProgress">Export my progress</button><label class="secondary-button file-label"><span data-i18n="importProgress">Import progress</span><input id="import-data" type="file" accept="application/json"></label><button id="reset-data" class="danger-button" data-i18n="resetProgress">Reset progress</button></div>
+          <p class="fine-print" data-i18n="localPrivacy">No account is needed. Your progress stays in this browser unless you export it.</p>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <button class="nav-item active" data-nav="home"><span>⌂</span><small data-i18n="home">Home</small></button>
+      <button class="nav-item" data-nav="lessons"><span>▤</span><small data-i18n="lessons">Lessons</small></button>
+      <button class="nav-item" data-nav="practice"><span>あ</span><small data-i18n="practice">Practice</small></button>
+      <button class="nav-item" data-nav="quiz"><span>✦</span><small data-i18n="quiz">Quiz</small></button>
+      <button class="nav-item" data-nav="progress"><span>◷</span><small data-i18n="progress">Progress</small></button>
+    </nav>
+  </div>
+  <div id="toast" role="status" aria-live="polite" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
